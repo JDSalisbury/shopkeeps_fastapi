@@ -10,6 +10,7 @@ dependencies = [
     "fastapi-cors>=0.0.6",
     "fastapi[standard]>=0.115.6",
     "openai>=1.59.3",
+    "psycopg2-binary>=2.9.10",
     "python-dotenv>=1.0.1",
     "requests>=2.32.3",
     "ruff>=0.8.6",

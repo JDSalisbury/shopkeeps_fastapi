@@ -16,6 +16,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from funcs import file_workrflows
 from dotenv import load_dotenv
 import os
+load_dotenv()
+
 SessionDep = Annotated[Session, Depends(get_session)]
 
 if os.getenv("LOCAL_DEV"):
@@ -25,8 +27,6 @@ if os.getenv("LOCAL_DEV"):
     )
 
 logger = logging.getLogger("app")
-
-load_dotenv()
 
 
 @asynccontextmanager
