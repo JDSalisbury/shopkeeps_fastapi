@@ -18,11 +18,13 @@ from dotenv import load_dotenv
 import os
 SessionDep = Annotated[Session, Depends(get_session)]
 
-logging.basicConfig(
-    level=logging.INFO,
-    format=f"     {Back.GREEN}{Fore.WHITE} %(levelname)s {
-        Style.RESET_ALL}  %(message)s",
-)
+if os.getenv("LOCAL_DEV"):
+    logging.basicConfig(
+        level=logging.INFO,
+        format=f"     {Back.GREEN}{Fore.WHITE} %(levelname)s {
+            Style.RESET_ALL}  %(message)s",
+    )
+
 logger = logging.getLogger("app")
 
 load_dotenv()
