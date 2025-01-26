@@ -21,8 +21,7 @@ SessionDep = Annotated[Session, Depends(get_session)]
 if os.getenv("LOCAL_DEV"):
     logging.basicConfig(
         level=logging.INFO,
-        format=f"     {Back.GREEN}{Fore.WHITE} %(levelname)s {
-            Style.RESET_ALL}  %(message)s",
+        format=f"     {Back.GREEN}{Fore.WHITE} %(levelname)s {Style.RESET_ALL}  %(message)s",  # noqa
     )
 
 logger = logging.getLogger("app")
