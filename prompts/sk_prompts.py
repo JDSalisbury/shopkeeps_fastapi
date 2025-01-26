@@ -20,8 +20,7 @@ def GENERATE_SHOPKEEP(location, shopkeeps):
                     "name (string), age (integer), sex (string), shop_name (string), description (string), "
                     "character_class (string, e.g., Wizard, Rogue, Fighter), voice (string), "
                     "gold (integer), personality (string), shop_type (string, e.g., Blacksmith, Apothecary, Armorer), "
-                    f"friendship_level (integer, between 0 and 10) and location which the value will be {
-                        location}. "
+                    f"friendship_level (integer, between 0 and 10) and location which the value will be {location}. "  # noqa
                     "Do not copy any the examples below, and do not have duplicate shop_types in the same given location. "
                     f"{shopkeeps}"
                     "do not use any of the following shop_types: "
@@ -51,8 +50,7 @@ def GENERATE_INVENTORY_FOR_SHOPKEEP(shopkeep):
                     "Generate a list of 5-10 items in JSON-structured format for a shop. Each item should have the following fields: "
                     "name (string), description (string), price (integer, in gold, between 10 and 500), "
                     "quantity (integer, between 1 and 20), damage (string or 'N/A'), and armor_class (string or 'N/A'). "
-                    f"The shop is called '{shopkeep.shop_name}', and its description is: '{
-                        shopkeep.description}'. "
+                    f"The shop is called '{shopkeep.shop_name}', and its description is: '{shopkeep.description}'. "  # noqa
                     "Base the items on the theme of the shop and ensure they follow D&D 5e rules. "
                     "Please provide a lengtheir response to ensure a variety of items. "
                     "Make sure the description is unique for each item and the details are coherent and clear. "
