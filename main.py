@@ -167,9 +167,12 @@ async def generate_shopkeep_inventory(shopkeep_id: int, session: SessionDep):
         if not shopkeep:
             raise HTTPException(status_code=404, detail="Shopkeep not found.")
 
+        inventory = session.exec(select(Item).where(
+            Item.shopkeep_id == shopkeep_id)).all()
+
         # Query ChatGPT for inventory
         response = await client.chat.completions.create(
-            **GENERATE_INVENTORY_FOR_SHOPKEEP(shopkeep)
+            **GENERATE_INVENTORY_FOR_SHOPKEEP(shopkeep, inventory)
         )
 
         # Parse the response

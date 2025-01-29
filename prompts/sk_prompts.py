@@ -28,7 +28,7 @@ def GENERATE_SHOPKEEP(location, shopkeeps):
                     "Locations should have a few different shop types, but should always have at least a two classic ones. If the location is missing a classic shop please add one. example: A blacksmith, a general store, a magic shop, a tavern, etc. "
                     "Only return a JSON object without any additional explanation."
                     "Example response format: "
-                    '{"name": "Eldon Ironheart","age": 54, "shop_name": "The Enchanted Anvil","description": "A skilled blacksmith known for crafting magical weapons and armor.","character_class": "Fighter","voice": "Gruff", "gold": 500,"personality": "Grumpy but loyal","shop_type": "Blacksmith","friendship_level": 6, "location": "Glimmerhold"}'
+                    '{"name": "Eldon Ironheart","age": 54, "sex": "Male", "shop_name": "The Enchanted Anvil","description": "A skilled blacksmith known for crafting magical weapons and armor.","character_class": "Fighter","voice": "Gruff", "gold": 500,"personality": "Grumpy but loyal","shop_type": "Blacksmith","friendship_level": 6, "location": "Glimmerhold"}'
 
                 ),
             },
@@ -38,7 +38,7 @@ def GENERATE_SHOPKEEP(location, shopkeeps):
     return prompt
 
 
-def GENERATE_INVENTORY_FOR_SHOPKEEP(shopkeep):
+def GENERATE_INVENTORY_FOR_SHOPKEEP(shopkeep, inventory):
     prompt = {
         "model": "gpt-3.5-turbo",
         "store": True,
@@ -56,6 +56,8 @@ def GENERATE_INVENTORY_FOR_SHOPKEEP(shopkeep):
                     "Make sure the description is unique for each item and the details are coherent and clear. "
                     "The description should also explain the item's effects or usage in the game via the games 5e mechanics. "
                     "The description should be at least 30 words long. "
+                    "Do not copy any the examples below, as it is inventory the shopkeep already has. "
+                    f"inventory: {inventory}"
                     "Example response format: "
                     '{ "inventory": [ { "name": "Sword of Flames", "description": "A magical sword that ignites enemies. The sword does 1d8 Fire Damge, then they must succeed a constitution save of 10, if they dont, they are on fire for the next 1d4 rounds and will take 1d6 fire damge per round. They may be extinguished with water or the classic stop drop and roll technique.", "price": 250, "quantity": 5, "damage": "1d8 fire", "armor_class": "N/A" } ] }'
                 ),
