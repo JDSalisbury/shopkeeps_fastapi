@@ -5,7 +5,7 @@ from fastapi import FastAPI, HTTPException, Depends
 from openai import AsyncOpenAI
 from sqlmodel import Session
 from models.db_setup import get_session, create_db_and_tables
-from models.shop_keep import ShopKeep, Item
+from models.shop_keep import ShopKeep, Item, Playerview
 from contextlib import asynccontextmanager
 import logging
 from colorama import Fore, Style, Back
@@ -79,10 +79,42 @@ def get_shopkeeps(session: SessionDep):
     return {"shopkeeps": [shopkeep.model_dump() for shopkeep in shopkeeps]}
 
 
+@app.post("/set_playerview")
+def set_playerview(session: SessionDep, shopkeep_id: int):
+    playerview = session.get(Playerview, 1)
+    if playerview:
+        playerview.shopkeep_id = shopkeep_id
+    else:
+        playerview = Playerview(id=1, shopkeep_id=shopkeep_id)
+
+    session.add(playerview)
+    session.commit()
+    session.refresh(playerview)
+
+    return {"Playerview": playerview.model_dump()}
+
+
+@app.get("/playerview")
+def get_playerview(session: SessionDep):
+    playerview = session.get(Playerview, 1)
+    if not playerview:
+        raise HTTPException(status_code=404, detail="Playerview not found.")
+    shopkeep = session.get(ShopKeep, playerview.shopkeep_id)
+    if not shopkeep:
+        raise HTTPException(status_code=404, detail="Shopkeep not found.")
+
+    statement = select(Item).where(Item.shopkeep_id == playerview.shopkeep_id)
+    items = session.exec(statement).all()
+    return {
+        "shopkeep": shopkeep.model_dump(),
+        "inventory": [item.model_dump() for item in items],
+    }
+
+
 @app.get("/shopkeeps")
 def list_shopkeeps(session: SessionDep):
     shopkeeps = session.exec(select(ShopKeep)).all()
-    return [{"id": shopkeep.id, "name": shopkeep.name, "image_url": shopkeep.image_url, "shop_type": shopkeep.shop_type, "location": shopkeep.location} for shopkeep in shopkeeps]
+    return [{"id": shopkeep.id, "name": shopkeep.name, "image_url": shopkeep.image_url, "shop_name": shopkeep.shop_name, "shop_type": shopkeep.shop_type, "location": shopkeep.location} for shopkeep in shopkeeps]
 
 
 @app.get("/shopkeep/{shopkeep_id}")

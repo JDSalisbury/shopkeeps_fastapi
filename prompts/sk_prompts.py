@@ -50,12 +50,14 @@ def GENERATE_INVENTORY_FOR_SHOPKEEP(shopkeep, inventory):
                     "Generate a list of 5-10 items in JSON-structured format for a shop. Each item should have the following fields: "
                     "name (string), description (string), price (integer, in gold, between 10 and 500), "
                     "quantity (integer, between 1 and 20), damage (string or 'N/A'), and armor_class (string or 'N/A'). "
-                    f"The shop is called '{shopkeep.shop_name}', and its description is: '{shopkeep.description}'. "  # noqa
+                    f"The shop is called '{shopkeep.shop_name}' the shop type is '{shopkeep.shop_type}', and its description is: '{shopkeep.description}'. "  # noqa
+                    f"The shopkeeper is a {shopkeep.character_class} named {shopkeep.name} who is {shopkeep.age} years old. "  # noqa
                     "Base the items on the theme of the shop and ensure they follow D&D 5e rules. "
                     "Please provide a lengtheir response to ensure a variety of items. "
                     "Make sure the description is unique for each item and the details are coherent and clear. "
                     "The description should also explain the item's effects or usage in the game via the games 5e mechanics. "
                     "The description should be at least 30 words long. "
+                    "The inventory can include basic items and should if the shop type is a general store, trading post, or similar. "
                     "Do not copy any the examples below, as it is inventory the shopkeep already has. "
                     f"inventory: {inventory}"
                     "Example response format: "

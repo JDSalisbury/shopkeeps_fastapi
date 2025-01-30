@@ -2,6 +2,11 @@ from typing import Optional, List
 from sqlmodel import Field, Relationship, SQLModel
 
 
+class Playerview(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    shopkeep_id: int
+
+
 class Item(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str
