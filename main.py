@@ -59,7 +59,8 @@ client = AsyncOpenAI(
 app.add_middleware(
     CORSMiddleware,
     # Update with your React app's URL
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["http://localhost:3000",
+                   "https://main-shopkeeps-react.onrender.com/"],
     allow_credentials=True,
     allow_methods=["*"],  # Allow all HTTP methods
     allow_headers=["*"],  # Allow all headers
